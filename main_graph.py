@@ -3,8 +3,11 @@ from langchain_core.runnables import RunnableLambda
 from agent1_research import research
 from agent2_answer_drafter import draft_answer
 from typing import TypedDict
-from langchain_community.chat_models import ChatOpenAI  # ✅ updated
-
+from langchain_community.chat_models import ChatOpenAI 
+import os
+from langchain_community.chat_models import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from dotenv import load_dotenv
 # STEP 1: Define a schema
 class GraphState(TypedDict):
     query: str
@@ -12,7 +15,7 @@ class GraphState(TypedDict):
     answer: str
 
 # STEP 2: Initialize the graph with schema
-graph = StateGraph(state_schema=GraphState)  # ✅ fixed
+graph = StateGraph(state_schema=GraphState)  
 
 # STEP 3: Add the nodes (functions)
 graph.add_node("research", RunnableLambda(lambda state: {"research": research(state["query"])}))

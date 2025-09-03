@@ -1,5 +1,5 @@
 import os
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 
@@ -17,3 +17,8 @@ def draft_answer(research_content: str) -> str:
     """
     prompt = prompt_template.format(content=research_content)
     return llm.predict(prompt)
+if __name__ == "__main__":
+    test_research = "Python is a programming language used for web development, data science, AI, and more."
+    answer = draft_answer(test_research)
+    print("\n--- Drafted Answer ---\n")
+    print(answer)
